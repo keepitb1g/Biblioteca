@@ -11,17 +11,16 @@ public class Biblioteca {
     }
 
     public void agregarLibro(Libro libro) {
+        boolean existe = false;
         for (Libro lib : this.libros) {
-            if (lib.getTitulo()==null && lib.getIsbn()==null) {
-                libros.add(lib);
+            if (lib.getTitulo().equals(libro.getTitulo()) && lib.getIsbn().equals(libro.getIsbn())) {
+                lib.setCantidadDisponible(lib.getCantidadDisponible() + 1);
+                existe = true;
                 break;
             }
-            else{
-                if (lib.getIsbn().equals(libro.getIsbn())) {
-                    lib.setCantidadDisponible(lib.getCantidadDisponible()+1);
-                    break;
-                }
-            }
+        }
+        if (!existe) {
+            this.libros.add(libro);
         }
     }
     public Libro buscarLibro(String titulo, String isbn) {
@@ -73,7 +72,7 @@ public class Biblioteca {
     public void prestarLibro(String titulo){
         for (Libro lib : this.libros) {
             if (lib.getDisponible() && lib.getTitulo().equals(titulo)) {
-                System.out.println("El libro: "+lib.getTitulo()+ "se ha prestado");
+                System.out.println("El libro: "+lib.getTitulo()+ " se ha prestado");
                 lib.setDisponible(false);
                 break;
             }

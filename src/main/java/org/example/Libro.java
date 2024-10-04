@@ -68,7 +68,7 @@ public class Libro {
 
     @Override
     public String toString() {
-        return "Título: "+this.titulo+"Autor: "+this.autor+"Género: "+this.genero+"ISBN: "+this.isbn+"Cantidad disponible: "+this.cantidadDisponible;
+        return "Título: "+this.titulo+" "+"Autor: "+this.autor+" "+"Género: "+this.genero+" "+"ISBN: "+this.isbn+" "+"Cantidad disponible: "+this.cantidadDisponible+" "+"Disponible: "+this.disponible;
     }
     public void prestarLibro(String titulo){
         if (this.disponible){
