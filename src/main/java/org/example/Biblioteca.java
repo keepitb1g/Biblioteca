@@ -23,57 +23,59 @@ public class Biblioteca {
             this.libros.add(libro);
         }
     }
-    public Libro buscarLibro(String titulo, String isbn) {
-        for (Libro lib : this.libros) {
-            if (lib.getTitulo().equals(titulo) && lib.getIsbn().equals(isbn)) {
-                return lib;
-            }break;
-        }
-        return null;
-    }
     public void mostrarLibrosDisponibles(){
         for (Libro lib : libros) {
-            System.out.println(lib.toString());
-        }
-    }
-    public void buscarLibroPorTitulo(String titulo) {
-        for (Libro lib : this.libros) {
-            if (lib.getTitulo().equals(titulo)) {
-                System.out.println("El libro: "+titulo);
-                lib.toString();
-                System.out.println();
-            } else {
-                System.out.println("No se ha encontrado el libro: "+titulo);
+            if (lib.getCantidadDisponible() > 0) {
+                System.out.println(lib.toString());
             }
         }
     }
     public void buscarLibroPorAutor(String autor) {
+        boolean encontrado = false;
         for (Libro lib : this.libros) {
             if (lib.getAutor().equals(autor)) {
-                System.out.println("El autor: "+autor+"tiene el siguiente libro");
-                lib.toString();
-                break;
-            }else {
-                System.out.println("No se ha encontrado el libro del autor: "+autor);
+                System.out.println("El autor: " + autor + " tiene el siguiente libro");
+                System.out.println(lib.toString());
+                encontrado = true;
             }
         }
+        if (!encontrado) {
+            System.out.println("No se ha encontrado el libro del autor: " + autor);
+        }
     }
-    public void eliminarLibro(String titulo){
+
+    public void buscarLibroPorTitulo(String titulo) {
+        boolean encontrado = false;
         for (Libro lib : this.libros) {
-            if (lib.getTitulo().equals(titulo) && lib.getCantidadDisponible()==0) {
-                libros.remove(lib);
-                System.out.println("El libro: "+titulo+"ha sido eliminado exitosamente.");
-                break;
-            }else {
-                System.out.println("El libro: "+titulo+"no se encuentra en la biblioteca.");
+            if (lib.getTitulo().equals(titulo)) {
+                System.out.println("El libro buscado es: " + titulo);
+                System.out.println();
+                encontrado = true;
             }
+        }
+        if (!encontrado) {
+            System.out.println("No se ha encontrado el libro: " + titulo);
+        }
+    }
+    public void eliminarLibro(String titulo) {
+        boolean encontrado = false;
+        for (Libro lib : this.libros) {
+            if (lib.getTitulo().equals(titulo)) {
+                libros.remove(lib);
+                System.out.println("El libro: " + titulo + " ha sido eliminado exitosamente.");
+                encontrado = true;
+                break;
+            }
+        }
+        if (!encontrado) {
+            System.out.println("El libro: " + titulo + " no se encuentra en la biblioteca.");
         }
     }
     public void prestarLibro(String titulo){
         for (Libro lib : this.libros) {
             if (lib.getDisponible() && lib.getTitulo().equals(titulo)) {
                 System.out.println("El libro: "+lib.getTitulo()+ " se ha prestado");
-                lib.setDisponible(false);
+                lib.prestarLibro(titulo);
                 break;
             }
             else{

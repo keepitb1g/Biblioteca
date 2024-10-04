@@ -65,7 +65,7 @@ public class Libro {
     public void setDisponible(boolean disponible) {
         this.disponible = disponible;
     }
-
+    //aqui esta la funcion para mostrar información del libro
     @Override
     public String toString() {
         return "Título: "+this.titulo+" "+"Autor: "+this.autor+" "+"Género: "+this.genero+" "+"ISBN: "+this.isbn+" "+"Cantidad disponible: "+this.cantidadDisponible+" "+"Disponible: "+this.disponible;
@@ -75,13 +75,13 @@ public class Libro {
             this.cantidadDisponible--;
             if(this.cantidadDisponible == 0){
                 this.disponible = false;
-                }System.out.println("Se ha prestado el libro"+titulo);
+                }System.out.println("Se ha prestado el libro "+titulo);
             } else{
-            System.out.println("El libro "+titulo+"no esta disponible");
+            System.out.println("El libro "+titulo+" no esta disponible");
         }
     }
     public void devolver(String titulo){
-        if (this.cantidadDisponible== 0){
+        if (this.cantidadDisponible== 0 || this.disponible==false){
             this.disponible = true;
         }this.cantidadDisponible++;
         System.out.println("El libro "+titulo+"se ha devuelto");
